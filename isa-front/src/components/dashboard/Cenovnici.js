@@ -39,7 +39,6 @@ class Cenovnici extends Component {
 
         return (
             <div>
-                <UserLoggedTabs></UserLoggedTabs>
                 <div className="container center">
                     <h2 className="red-text lighten-1 center">Cenovnik hotela {imeHotela}</h2>
                     {cenovniciList}

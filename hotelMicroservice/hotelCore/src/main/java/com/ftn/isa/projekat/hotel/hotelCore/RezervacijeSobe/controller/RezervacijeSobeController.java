@@ -111,8 +111,20 @@ public class RezervacijeSobeController {
 							 @ApiResponse( code = 404, message = "Not Found")})
 	public ResponseEntity<List<HotelskaSobaDTO>> getFreeRoomsPrice(@PathVariable("id") Long id, @PathVariable("datumOd") String datumOd, @PathVariable("datumDo") String datumDo, @PathVariable("cenaMin") String cenaMin, @PathVariable("cenaMax") String cenaMax) throws ParseException{
 		
-		Date dateOd = new SimpleDateFormat("yyyy-MM-dd").parse(datumOd);
-		Date dateDo = new SimpleDateFormat("yyyy-MM-dd").parse(datumDo);
+		Date dateOd;
+		Date dateDo;
+		
+		if(datumOd.equals("-1")) {
+			dateOd = new Date(Long.MIN_VALUE);
+		}else {
+			dateOd = new SimpleDateFormat("yyyy-MM-dd").parse(datumOd);
+		}
+		
+		if(datumDo.equals("-1")) {
+			dateDo = new Date(Long.MAX_VALUE);
+		}else {
+			dateDo = new SimpleDateFormat("yyyy-MM-dd").parse(datumDo);
+		}
 		int minPrice = Integer.parseInt(cenaMin);
 		int maxPrice = Integer.parseInt(cenaMax);
 		List<HotelskaSobaDTO> lista = rezervacijeSobeService.getFreeRoomsPrice(id, dateOd, dateDo, minPrice, maxPrice);

@@ -15,6 +15,10 @@ import { connect } from "react-redux"
 import { hideDodatoUKorpu } from "../../../store/actions/PurchasesActions";
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
+import LoggedUserSobeList from "../loggedUserHotel/LoggedUserSobeList";
+import Cenovnici from "../Cenovnici";
+import DodatneUsluge from "../DodatneUsluge";
+import LoggedUserReservationForm from "../loggedUserHotel/LoggedUserReservationForm";
 
 class DashboardUserLogged extends Component {
 
@@ -69,11 +73,15 @@ class DashboardUserLogged extends Component {
                             <Route path="/filijale/:serviceId" component={Filijale}></Route>
                             <Route path="/fastCarReservation" render={(props) => <FastCarReservation />}></Route>
 
-                            <Route path="/smestaj" component={HotelPretraga}></Route>
+                            <Route path="/smestaj" component={LoggedUserHotelList}></Route>
                             <Route path="/letovi" component={LetoviPretraga}></Route>
                             <Route path="/listaHotela/:imeAdresa/:datumOd/:datumDo/:brojSoba/:brojGostiju" component={HotelIzlistavanje}></Route>
                             <Route path="/listaLetova" component={LetoviIzlistavanje}></Route>
                             <Route path="/listaHotelaLogged" component={LoggedUserHotelList}></Route>
+                            <Route path = "/sobeLogged/:hotelId" component = {LoggedUserSobeList}></Route>
+                            <Route path = "/cenovnici/:hotelId" component = {Cenovnici}></Route>
+                            <Route path = "/usluge/:hotelId" component = {DodatneUsluge}></Route>
+                            <Route path="/rezervacijaLogged/:hotelId/:sobaId" component={LoggedUserReservationForm}></Route>
 
                         </div>
                     </div>

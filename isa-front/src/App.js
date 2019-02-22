@@ -173,10 +173,7 @@ class App extends Component {
             <Route path="/izmenaTipovaAdmin/:tipId" component={IzmenaTipaAdmin}></Route>
             <Route path="/izmenaHotelskihSobaAdmin/:sobaId" component={IzmenaHotelskihSobaAdmin}></Route>
             <Route path="/izmenaCenovnikaAdmin/:cenovnikId" component={IzmenaCenovnikaAdmin}></Route>
-            <Route path="/sobe/:hotelId/:datumOd/:datumDo" component={Sobe}></Route>
             <Route path="/sobeLogged/:hotelId" component={LoggedUserSobeList}></Route>
-            <Route path="/usluge/:hotelId" component={DodatneUsluge}></Route>
-            <Route path="/cenovnici/:hotelId" component={Cenovnici}></Route>
             <Route path="/cenovniciLogged/:hotelId" component={LoggedUserCenovnikList}></Route>
             <Route path="/uslugeLogged/:hotelId" component={LoggedUserUslugeList}></Route>
             <Route path="/izlistavanjeCenaSobeAdmin/:sobaId" component={CenaSobeIzlistavanjeAdmin}></Route>

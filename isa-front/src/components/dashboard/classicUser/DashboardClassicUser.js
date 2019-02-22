@@ -9,6 +9,9 @@ import HotelPretraga from "../HotelPretraga";
 import LetoviPretraga from "../LetoviPretraga";
 import LetoviIzlistavanje from "../LetoviIzlistavanje";
 import HotelIzlistavanje from "../HoteliIzlistavanje";
+import Sobe from "../Sobe";
+import DodatneUsluge from "../DodatneUsluge";
+import Cenovnici from "../Cenovnici";
 
 class DashboardClassicUser extends Component {
 
@@ -46,6 +49,9 @@ class DashboardClassicUser extends Component {
 
                            
                             <Route path="/listaHotela/:imeAdresa/:datumOd/:datumDo/:brojSoba/:brojGostiju" component={HotelIzlistavanje}></Route>
+                            <Route path="/sobe/:hotelId/:datumOd/:datumDo" component={Sobe}></Route>
+                            <Route path="/usluge/:hotelId" component={DodatneUsluge}></Route>
+                            <Route path="/cenovnici/:hotelId" component={Cenovnici}></Route>
                             <Route path="/listaLetova" component={LetoviIzlistavanje}></Route>
                         </div>
                     </div>

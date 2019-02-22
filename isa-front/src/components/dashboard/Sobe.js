@@ -63,7 +63,7 @@ class Sobe extends Component {
         const datumDo = this.props.match.params.datumDo;
         const id = this.props.match.params.hotelId;
         console.log(this.state);
-        Axios.get('http://localhost:8092/api/hotel/rezervacije/'+ id +'/'+ datumOd +'/'+ datumDo +'/'+ cenaMin +'/'+ cenaMax)
+        axios.get('http://localhost:8092/api/hotel/rezervacije/'+ id +'/'+ datumOd +'/'+ datumDo +'/'+ cenaMin +'/'+ cenaMax)
         .then(res => {
             console.log(res);
             this.setState({
@@ -112,7 +112,7 @@ class Sobe extends Component {
                     <h2 className="red-text lighten-1 center">Lista soba hotela {imeHotela}</h2>
                     <form onSubmit = {this.handleSubmit}>
                         <div className="input-field">
-                            <label htmlFor="cenaMin">Cena od:</label>
+                            <label htmlFor="cenaMin">Cena od NERADI:</label>
                             <input type="number" id='cenaMin' onChange = {this.handleChange}/>
                         </div>
                         <div className="input-field">
