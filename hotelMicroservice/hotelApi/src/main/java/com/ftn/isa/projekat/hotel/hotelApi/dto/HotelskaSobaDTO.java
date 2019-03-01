@@ -15,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class HotelskaSobaDTO {
 	
 	private Long id;
+	private int brojSobe;
 	private int floor;
 	private int originalnaCena;
 	private Date datumOd;

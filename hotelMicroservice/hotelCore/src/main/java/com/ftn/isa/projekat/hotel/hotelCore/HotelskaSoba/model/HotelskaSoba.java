@@ -36,6 +36,9 @@ public class HotelskaSoba {
 	@Column (name="id")
 	private Long id;
 	
+	@Column (name="brojSobe", nullable=false)
+	private int brojSobe;
+	
 	@Column (name="floor", nullable=false)
 	private int floor;
 	

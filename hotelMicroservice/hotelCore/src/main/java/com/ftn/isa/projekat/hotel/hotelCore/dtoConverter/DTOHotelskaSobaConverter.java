@@ -27,6 +27,7 @@ public class DTOHotelskaSobaConverter {
 	public HotelskaSobaDTO convertToDTO(HotelskaSoba soba) {	
 		HotelskaSobaDTO dto=new HotelskaSobaDTO();	
 		dto.setId(soba.getId());
+		dto.setBrojSobe(soba.getBrojSobe());
 		dto.setFloor(soba.getFloor());
 		dto.setOriginalnaCena(soba.getOriginalnaCena());
 		dto.setReserved(soba.getReserved());
@@ -44,6 +45,7 @@ public class DTOHotelskaSobaConverter {
 		}
 		
 		HotelskaSoba bean = new HotelskaSoba();		
+		bean.setBrojSobe(sobaDTO.getBrojSobe());
 		bean.setFloor(sobaDTO.getFloor());
 		bean.setOriginalnaCena(sobaDTO.getOriginalnaCena());
 		bean.setReserved(sobaDTO.getReserved());

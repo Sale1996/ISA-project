@@ -126,7 +126,7 @@ public class RezervacijeSobeService implements IRezervacijeSobeService{
 	
 	
 	public List<HotelskaSobaDTO> getFreeRooms(Long id, Date datumOd, Date datumDo){
-		int vecPostoji;
+		/*int vecPostoji;
 		int pronasao;
 		List<HotelskaSobaDTO> list = new ArrayList<HotelskaSobaDTO>();		
 		Optional<List<RezervacijeSobe>> reservationList = Optional.of(rezervacijeSobeRepository.findAll());
@@ -137,7 +137,7 @@ public class RezervacijeSobeService implements IRezervacijeSobeService{
 			for(RezervacijeSobe rezervacija : reservationList.get()) {//da li soba pripada zadatom hotelu i da li je slobodna u okviru zadatog vremenskog intervala?
 				if(rezervacija.getHotel_rezervacijeSobe().getId() == id) {
 					if((rezervacija.getDateFrom().before(datumOd) && rezervacija.getDateUntil().after(datumOd)) || (rezervacija.getDateUntil().after(datumDo) && rezervacija.getDateFrom().before(datumDo))
-							|| (rezervacija.getDateFrom().after(datumOd) && rezervacija.getDateUntil().before(datumDo))) {
+							|| (rezervacija.getDateFrom().after(datumOd) && rezervacija.getDateUntil().before(datumDo) || (rezervacija.getDateFrom().equals(datumOd) && rezervacija.getDateUntil().equals(datumOd)))) {
 						idList.add(rezervacija.getSobaId().getId());//dodaj id sobe koja nije slobodna, kako bi kasnije znali da je ignorisemo u daljoj potrazi
 						continue;
 					}else {
@@ -173,7 +173,59 @@ public class RezervacijeSobeService implements IRezervacijeSobeService{
 			return returnList;
 		}
 
+		return Collections.emptyList();*/
+		
+		int pronasaoURezervaciji = 0;
+		List<HotelskaSoba> listSvihSoba = hotelskaSobaRepository.findAll();
+		List<HotelskaSoba> listSobaHotela = new ArrayList<HotelskaSoba>();
+		List<HotelskaSobaDTO> returnList = new ArrayList<HotelskaSobaDTO>();
+		List<RezervacijeSobe> listRezervacija = rezervacijeSobeRepository.findAll();
+		Optional<Hotel> hotel = hotelRepository.findById(id);
+		
+		if(hotel.isPresent()) {
+			for(HotelskaSoba hs : listSvihSoba) {
+				if(hs.getHotel_hotelskeSobe().getId() == id) {
+					listSobaHotela.add(hs);
+				}
+			}
+			
+			for(HotelskaSoba hs : listSobaHotela) {
+				pronasaoURezervaciji = 0;
+				if(listRezervacija != null) {
+					for(RezervacijeSobe rs : listRezervacija) {
+						if(rs.getSobaId().getId() == hs.getId()) {
+							pronasaoURezervaciji = 1;
+							if((rs.getDateFrom().before(datumOd) && rs.getDateUntil().after(datumOd)) || (rs.getDateUntil().after(datumDo) && rs.getDateFrom().before(datumDo))
+									|| (rs.getDateFrom().after(datumOd) && rs.getDateUntil().before(datumDo) || (rs.getDateFrom().equals(datumOd) && rs.getDateUntil().equals(datumOd)
+											|| (rs.getDateFrom().before(datumOd) && rs.getDateUntil().equals(datumDo)) || (rs.getDateFrom().after(datumOd) && rs.getDateUntil().equals(datumDo))
+											|| (rs.getDateFrom().equals(datumOd) && rs.getDateUntil().before(datumDo)) || (rs.getDateFrom().equals(datumOd) && rs.getDateUntil().after(datumDo))))) {
+								break;
+							}else {
+								int vecPostoji = 0;
+								for(int i=0; i<returnList.size(); i++) {
+									if(returnList.get(i).getId() == hs.getId()) {
+										vecPostoji = 1;
+									}
+								}
+								if(vecPostoji == 0) {
+									returnList.add(hotelskaSobaConverter.convertToDTO(hs));
+								}
+							}
+						}
+					}
+				}else {
+					return returnList;
+				}
+				if(pronasaoURezervaciji == 0) {
+					returnList.add(hotelskaSobaConverter.convertToDTO(hs));
+				}
+			}	
+			
+			return returnList;
+		}
+		
 		return Collections.emptyList();
+		
 	}
 	
 	public List<HotelskaSobaDTO> getFreeRoomsPrice(Long id, Date datumOd, Date datumDo, int cena, int cena1){
