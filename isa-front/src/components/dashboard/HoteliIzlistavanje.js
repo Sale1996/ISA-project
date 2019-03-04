@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import UserLoggedTabs from '../layout/tabs/UserLoggedTabs';
 import { Link } from "react-router-dom"
-import MapContainer from "./GoogleMapa/MapContainer";
 import "./neregistrovan.css";
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { filterHotel } from '../../store/actions/HotelActions'
 
 
 class HotelIzlistavanje extends Component {
 
-    state = {
+    /*state = {
         hoteli: [],
         ocene: []
-    }
+    }*/
 
-    componentDidMount() {
+   /* componentDidMount() {
         const imeAdresa = this.props.match.params.imeAdresa;
         const datumOd = this.props.match.params.datumOd;
         const datumDo = this.props.match.params.datumDo;
@@ -69,7 +70,7 @@ class HotelIzlistavanje extends Component {
 
 
 
-    }
+    }*/
 
     handleSobeClick = (hotelId) => {
         this.props.history.push('/sobe/' + hotelId + '/' + this.props.match.params.datumOd + '/' + this.props.match.params.datumDo)
@@ -84,23 +85,24 @@ class HotelIzlistavanje extends Component {
     }
 
     render() {
-        const { hoteli } = this.state;
+        console.log(this.props)
+        const { hoteli } = this.props;
         var suma = 0;
         var count = 0;
         const hoteliList = hoteli.length ? (hoteli.map(hotel => {
             suma = 0;
             count = 0;
-            this.state.ocene.map(ocena => {
+           /* this.state.ocene.map(ocena => {
                 if (ocena.hotelId == hotel.id) {
                     suma += ocena.rating;
                     count++;
                 }
-            })
+            })*/
 
             var prosecnaOcena = suma / count;
 
             return (
-                <div className="post card grey lighten-2">
+                <div className="post card grey lighten-2" key = {hotel.id}>
                     <div className="card-content container">
                         <span className="card-title center">{hotel.name}</span>
                         <div className="left-align">
@@ -147,7 +149,12 @@ class HotelIzlistavanje extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return{
+        hoteli: state.hotel.hoteli //ovo state se odnosi na reducer. Uzimamo hotele iz reducera i pravimo hoteli prop ovde
+    }
+}
 
-export default HotelIzlistavanje;
+export default connect(mapStateToProps)(HotelIzlistavanje);
 
 

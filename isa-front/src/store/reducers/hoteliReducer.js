@@ -1,5 +1,18 @@
 const initState = {
-    hoteli: []
+    hoteli: [
+       /* {
+            "id": 2,
+            "name": "e",
+            "adress": "e",
+            "promotionalDescription": "e"
+        },
+        {
+            "id": 3,
+            "name": "e",
+            "adress": "e",
+            "promotionalDescription": "e"
+        }*/
+    ]
 }
 
 const hoteliReducer = (state = initState, action) => {
@@ -13,6 +26,10 @@ const hoteliReducer = (state = initState, action) => {
         case 'EDIT_HOTEL':
             console.log('izmenjen hotel', action.hotelId);
             window.location = '/listaHotelaAdmin';
+            break;
+        case 'FILTER_HOTEL':
+            console.log('izmenjen hotel', action.filter);
+            
             break;
         case 'CREATE_USLUGA':
             console.log('kreirana usluga', action.usluga);

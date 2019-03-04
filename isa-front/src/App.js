@@ -4,7 +4,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layout/Navbar";
 import Friends from "./components/dashboard/friends/FriendsComponent";
 import UserProfile from "./components/dashboard/UserProfile";
-import HotelPretraga from "./components/dashboard/HotelPretraga";
+//import HotelPretraga from "./components/dashboard/HotelPretraga";
 import LetoviPretraga from "./components/dashboard/LetoviPretraga";
 import HoteliIzlistavanje from "./components/dashboard/HoteliIzlistavanje";
 import LetoviIzlistavanje from "./components/dashboard/LetoviIzlistavanje";
@@ -138,14 +138,14 @@ class App extends Component {
                 ''
             }
 
-            <Route path="/smestaj" component={HotelPretraga}></Route>
+            
             <Route path="/letovi" component={LetoviPretraga}></Route>
 
 
 
 
 
-            <Route path="/listaHotela/:imeAdresa/:datumOd/:datumDo/:brojSoba/:brojGostiju" component={HoteliIzlistavanje}></Route>
+            
             <Route path="/listaLetova" component={LetoviIzlistavanje}></Route>
             <Route path="/listaHotelaLogged" component={LoggedUserHotelList}></Route>
 

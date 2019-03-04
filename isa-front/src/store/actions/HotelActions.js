@@ -45,7 +45,11 @@ export const filterHotel = (filter) =>{
         const datumDo = filter.datum_odlaska
         const brojSoba = filter.sobe
         const brojGostiju = filter.gosti
-        window.location = '/listaHotela/'+ imeAdresa +'/'+ datumOd +'/'+ datumDo +'/'+ brojSoba +'/'+ brojGostiju
+        axios.get('http://localhost:8092/api/hotel/hotel/filter/' + imeAdresa + '/' + datumOd + '/' + datumDo + '/' + brojSoba + '/' + brojGostiju)
+            .then(res => {
+                console.log(res.data);
+                dispatch({ type: 'FILTER_HOTEL', filter: filter});
+            })
     }
 }
 

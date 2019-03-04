@@ -60,6 +60,7 @@ class HotelPretraga extends Component {
                             </div>
                             <div className="input-field">
                                 <button className="btn blue lighten-1 z-depth-0">Pretraži</button>
+
                             </div>
                         </div>
                     </form>
